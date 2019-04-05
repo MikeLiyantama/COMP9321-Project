@@ -1,7 +1,7 @@
 import pandas as pd
 
 #read clean csv
-data = pd.read_csv('/Users/loki/Downloads/COMP9321-Project-master/backend/data/processed.cleveland.csv')
+data = pd.read_csv('data/processed.cleveland.csv')
 
 length = len(data)
 
