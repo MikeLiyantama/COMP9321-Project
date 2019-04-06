@@ -1,0 +1,82 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>COMP9321 - Heaart Risk Predictor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" media="screen" href="css/materialize.min.css" media="screen,projection"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css"/>
+    </head>
+    <body>
+        <main role='main'>
+            <div class="container" id="main">
+                <div class="row">
+                    <div class="col s12">
+                        <ul class="tabs">
+                            <li class="tab col s6"><a href="#stats-tab" class="active">Statistics</a></li>
+                            <li class="tab col s6"><a href="#prediction-tab">Prediction</a></li>
+                        </ul>
+                    </div>
+                    <div id="stats-tab">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <select>
+                                    <option value="" disabled selected>Choose data</option>
+                                    <option value="chest_pain_type">Chest Pain Type</option>
+                                    <option value="resting_blood_pressure">Resting Blood Pressure</option>
+                                    <option value="serum_cholestoral">Serum Cholesteral</option>
+                                    <option value="fasting_blood_sugar">Fasting Blood Sugar</option>
+                                    <option value="resting_electrocardiographic">Resting Electrocardiographic Results</option>
+                                    <option value="max_heart_rate">Maximum Heart Rate</option>
+                                    <option value="exercise_induced_angina">Exercise Induced Angina</option>
+                                    <option value="oldpeak">ST Depression</option>
+                                    <option value="num_major_vessels">Number of Major Vessels</option>
+                                </select>
+                            </div>
+
+                            <div id="input-results">
+                                <!--------INSERT GRAPH HERE--------->
+                            </div>
+                        </div>
+                    </div>
+                    <div id="prediction-tab">
+                        <div class="row">
+                            <form class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12 prediction-input">
+                                        <input id="resting-blood-pressure" type="text">
+                                        <label for="resting-blood-pressure">Resting Blood Pressure</label>
+                                    </div>
+                                    <div class="input-field col s12 prediction-input">
+                                        <input id="serum-cholestoral" type="text">
+                                        <label for="serum-cholestoral">Serum Cholesteral</label>
+                                    </div>
+                                    <div class="input-field col s12 prediction-input">
+                                        <input id="fasting-blood-sugar" type="text">
+                                        <label for="fasting-blood-sugar">Fasting Blood Sugar</label>
+                                    </div>
+                                    <div class="input-field col s12 prediction-input">
+                                        <input id="resting-electrocardiographic" type="text">
+                                        <label for="resting-electrocardiographic">Resting Electrocardiographic</label>
+                                    </div>
+                                    <div class="input-field col s12 prediction-input">
+                                        <input id="max-heart-rate" type="text">
+                                        <label for="max-heart-rate">Maximum Heart Rate</label>
+                                    </div>
+
+                                    <a class="btn waves-effect waves-light">Predict!</a>
+                                </div>
+                            </form>
+
+                            <div class="row" id="prediction-result">
+                                <!----------PREDICTION RESULT HERE-------->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script type="text/javascript" src="src/js/materialize.min.js"></script>
+    </body>
+</html>
