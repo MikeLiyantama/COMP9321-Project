@@ -7,7 +7,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link rel="stylesheet" type="text/css" media="screen" href="css/materialize.min.css" media="screen,projection"/>
         <link rel="stylesheet" type="text/css" media="screen" href="css/styles.css"/>
-        <script src="plotly-latest.min.js"></script>
+        <script type="text/javascript" src="js/plotly-latest.min.js"></script>
     </head>
     <body>
         <main role='main'>
@@ -23,7 +23,7 @@
                 <div class="row">
                     <div id="stats-tab">
                         <div class="input-field col s12">
-                            <select>
+                            <select id="select-stats">
                                 <option value="" disabled selected>Choose data</option>
                                 <option value="chest_pain_type">Chest Pain Type</option>
                                 <option value="resting_blood_pressure">Resting Blood Pressure</option>
@@ -38,13 +38,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row hidden">
                     <div id="stats-results">
                         <p>INSERT GRAPH HERE</p>
                         <!--------INSERT GRAPH HERE--------->
                     </div>
                 </div>
-                <div class="row hidden">
+                <div class="row">
                     <div id="prediction-tab">
                         <form class="col s12">
                             <div class="row">
@@ -69,7 +69,7 @@
                                     <label for="max-heart-rate">Maximum Heart Rate</label>
                                 </div>
 
-                                <a class="btn waves-effect waves-light">Predict!</a>
+                                <a class="btn waves-effect waves-light" id="predict-submit-button">Predict!</a>
                             </div>
                         </form>
                     </div>
@@ -81,6 +81,7 @@
             </div>
         </main>
         <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="js/ui.js"></script>
     </body>
 </html>
