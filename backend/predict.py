@@ -76,3 +76,17 @@ for i in dict_of_weight:
 print()
 print (classification_report(y_predict, y_test, target_names = ['no heart diease','have heart diease']))
 
+import numpy as np
+#recieve a user_input and predict the target
+#receive this from api : user_input=[[63,1,1,145,233,1,2,150,0,2.3,3,0,6,0]]
+#user_input =
+data= np.array(user_input)
+df = pd.DataFrame({'age':data[:,0], 'sex':data[:,1], 'chest_pain_type':data[:,2], 'resting_blood_pressure':data[:,3],
+       'serum_cholestoral':data[:,4], 'fasting_blood_sugar':data[:,5],
+       'resting_electrocardiographic':data[:,6], 'max_heart_rate':data[:,7],
+       'exercise_induced_agina':data[:,8], 'oldpeak':data[:,9], 'slope_of_peak_ST_segment':data[:,10],
+       'num_major_vessels':data[:,11], 'thal':data[:,12]})
+
+newdf = vec.transform(df.to_dict(orient='record'))
+prediction = dtc.predict(newdf)
+print(prediction)
