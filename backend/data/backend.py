@@ -47,13 +47,17 @@ class FrontR(Resource):
 		df = sql.read_sql('select * from ' + 'data', cnx)
 		cnx.commit()
 		cnx.close()
-		if df.feature_name.unique() == NULL:
+		if df.feature_name.unique() == None:
 			return 'ERROR:feature does not exist',404
 		if feature_name.isnumeric() == True:
 			return 'ERROR:invalid input',404
 		else:
 			df = df.loc['age','sex',feature_name]
 			return df_to_json(df),200
+
+		#{ 'age ' : df['age'],
+		#  'sex ' : df['sex'],
+		#  feature_name : df[feature_name]}
 
 
 '''api for NN'''
@@ -67,11 +71,12 @@ class NNet(Resource):
 		if L.isnumeric() == True:
 			return L,200
 		else:
-			return 'ERROR:invalid input', 404
+			return {'message' : 'ERROR:invalid input' } , 404
 
 if __name__ == '__main__':
 	db_file = 'data.db'
 	create_db(db_file)
 	load_csv()
+	#app.run(debug=True)
 	http_server = WSGIServer(('', 5000), app)
 	http_server.serve_forever()
