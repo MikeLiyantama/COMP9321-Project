@@ -15,6 +15,7 @@ import predict.py
 """ create a database connection to a SQLite database """
 def create_db(db_file):
 	if os.path.isfile(db_file):
+		#judge if there already had the database
 		db_exists = True
 	else:
 		db_exists = False
@@ -54,6 +55,7 @@ class FrontR(Resource):
 		df = sql.read_sql('select * from ' + 'data', cnx)
 		cnx.commit()
 		cnx.close()
+		# judge the input
 		if df.feature_name.unique() == None:
 			return {'message' : 'ERROR:feature does not exist'},404
 		if feature_name.isnumeric() == True:
@@ -62,7 +64,7 @@ class FrontR(Resource):
 			df = {'age' : df['age'],
 			'sex' : df['sex'],
 			feature_name : df[feature_name]}
-
+        #transfer to json
 		return df_to_json(df),200
 
 			
@@ -73,7 +75,7 @@ class user_input_Prediction(Resource):
 	@api.response(200, 'Success')
 	@api.response(400, 'Error')
 	def post(self, json_obj):
-                #get a json_obj of single record as user_input
+        #get a json_obj of single record as user_input
 		L = list()
 		L.append(json_obj['age'], json_obj['sex'], json_obj['chest_pain_type'],json_obj['resting_blood_pressure'],json_obj['serum_cholestoral'],json_obj['fasting_blood_sugar'],json_obj['resting_electrocardiographic'],json_obj['max_heart_rate'],json_obj['exercise_induced_agina'],json_obj['oldpeak'],json_obj['slope_of_peak_ST_segment'],json_obj['num_major_vessels'],json_obj['thal'])
 		if L.isnumeric() == True:
@@ -83,6 +85,7 @@ class user_input_Prediction(Resource):
 		else:
 			return {'message' : 'ERROR:invalid input' } , 400
 
+
 '''api for important factors'''
 @api.route('/backend/')
 class important_factors_weights(Resource):
@@ -91,8 +94,6 @@ class important_factors_weights(Resource):
 		dict_weights = important_factors()
 		return dict_weights, 200
 		
-
-
 
 if __name__ == '__main__':
 	db_file = 'data.db'
