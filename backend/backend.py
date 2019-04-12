@@ -71,7 +71,7 @@ class FrontR(Resource):
 @api.route('/backend/<json_obj>')
 class user_input_Prediction(Resource):
 	@api.response(200, 'Success')
-	@api.response(404, 'Error:Resource does not exist')
+	@api.response(400, 'Error')
 	def post(self, json_obj):
                 #get a json_obj of single record as user_input
 		L = list()
