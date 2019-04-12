@@ -9,7 +9,6 @@ from flask_restplus import Resource, Api
 from flask_restplus import fields
 from flask_restplus import inputs
 from flask_restplus import reqparse
-from gevent.pywsgi import WSGIServer
 
 def create_db(db_file):
 	""" create a database connection to a SQLite database """
@@ -77,6 +76,4 @@ if __name__ == '__main__':
 	db_file = 'data.db'
 	create_db(db_file)
 	load_csv()
-	#app.run(debug=True)
-	http_server = WSGIServer(('', 5000), app)
-	http_server.serve_forever()
+	app.run(debug=True)
