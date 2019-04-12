@@ -51,7 +51,7 @@ $(document).ready(function() {
                 }
                 generateScatter(male_age, male_data, female_age, female_data, item);
             } else if (item == 'chest_pain_type'){
-                
+
             }
         });
     });
@@ -80,7 +80,24 @@ $(document).ready(function() {
             }
         })
     });
+
+    $('#stat-tab-btn').click(function(e){
+        var pred_res = document.getElementById('prediction-result');
+        var stat_res = document.getElementById('stats-results');
+        pred_res.classList.add('hidden');
+        stat_res.classList.remove('hidden');
+    });
+    
+    $('#pred-tab-btn').click(function(e){
+        var pred_res = document.getElementById('prediction-result');
+        var stat_res = document.getElementById('stats-results');
+        pred_res.classList.remove('hidden');
+        stat_res.classList.add('hidden');
+    });
 });
+
+
+
 
 //Plotly Helper
 
