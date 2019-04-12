@@ -61,7 +61,7 @@ class FrontR(Resource):
 			df = {'age' : df['age'],
 			'sex' : df['sex'],
 			feature_name : df[feature_name]}
-		/	return df_to_json(df),200
+			return df_to_json(df),200
 
 @api.route('/backend/')
 class Newdata(Resource):
