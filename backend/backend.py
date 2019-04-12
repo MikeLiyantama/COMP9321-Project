@@ -13,6 +13,8 @@ import os
 from predict import important_factors
 from predict import predict_target
 # import another python file
+from gevent.pywsgi import WSGIServer
+#test
 
 """ create a database connection to a SQLite database """
 def create_db(db_file):
@@ -21,14 +23,14 @@ def create_db(db_file):
 		db_exists = True
 	else:
 		db_exists = False
-	try:
-		cnx = sqlite3.connect(db_file)
-	except Error as e:
-		print(Error)
-	finally:
-		if db_exists == False:
-			load_csv()
-		cnx.close()
+		try:
+			cnx = sqlite3.connect(db_file)
+		except Error as e:
+			print(Error)
+		finally:
+			if db_exists == False:
+				load_csv()
+				cnx.close()
 
 """inject csv to the dataframe"""
 def load_csv():
@@ -38,10 +40,6 @@ def load_csv():
 	cnx.commit()
 	cnx.close()
 
-'''transfer dataframe to json'''
-def df_to_json(df):
-	result = (df.to_json(orient='records'))
-	return result
 
 
 app = Flask(__name__)
@@ -57,17 +55,17 @@ class FrontR(Resource):
 		df = sql.read_sql('select * from ' + 'data', cnx)
 		cnx.commit()
 		cnx.close()
-		# judge the input
-		if df.feature_name.unique() == None:
+		# judge the input correct or not
+		if feature_name not in df:
 			return {'message' : 'ERROR:feature does not exist'},404
 		if feature_name.isnumeric() == True:
 			return {'message' : 'ERROR:invalid input' } , 404
 		else:
-			df = {'age' : df['age'],
-			'sex' : df['sex'],
-			feature_name : df[feature_name]}
-        #transfer to json
-		return df_to_json(df),200
+			df = {'age' : list(df['age']),
+			'sex' : list(df['sex']),
+			str(feature_name) : list(df[str(feature_name)])}
+        #sent as json
+		return df ,200
 
 			
 
@@ -82,8 +80,9 @@ class user_input_Prediction(Resource):
 		L.append(json_obj['age'], json_obj['sex'], json_obj['chest_pain_type'],json_obj['resting_blood_pressure'],json_obj['serum_cholestoral'],json_obj['fasting_blood_sugar'],json_obj['resting_electrocardiographic'],json_obj['max_heart_rate'],json_obj['exercise_induced_agina'],json_obj['oldpeak'],json_obj['slope_of_peak_ST_segment'],json_obj['num_major_vessels'],json_obj['thal'])
 		if L.isnumeric() == True:
 			predict_num = predict_target(L)
-			df = {'target' : predict_num}
-			return df_to_json(df) , 200
+			#sent as json
+			df = {'target' : list(predict_num)}
+			return df , 200
 		else:
 			return {'message' : 'ERROR:invalid input' } , 400
 
@@ -101,3 +100,6 @@ if __name__ == '__main__':
 	db_file = 'data.db'
 	create_db(db_file)
 	app.run(debug=True)
+	#test
+	http_server = WSGIServer(('', 5000), app)
+	http_server.serve_forever()
