@@ -34,23 +34,24 @@ $(document).ready(function() {
         })
         .then(res => res.json())
         .then(data => {
-            female_data = []
-            female_age = []
-            male_data = []
-            male_age = []
-      
-            for (var i = 0; i < data['age'].length; i++){
-                if (data['sex'][i] == 1){ // Male
-                    male_age.push(data['age'][i]);
-                    male_data.push(data[item][i]);
-                } else {
-                    female_age.push(data['age'][i]);
-                    female_data.push(data[item][i]);
-                }
-            }
-            
             if(item == 'max_heart_rate' || item == 'resting_blood_pressure' || item == 'serum_cholestoral' || item == 'oldpeak'){
+                female_data = []
+                female_age = []
+                male_data = []
+                male_age = []
+            
+                for (var i = 0; i < data['age'].length; i++){
+                    if (data['sex'][i] == 1){ // Male
+                        male_age.push(data['age'][i]);
+                        male_data.push(data[item][i]);
+                    } else {
+                        female_age.push(data['age'][i]);
+                        female_data.push(data[item][i]);
+                    }
+                }
                 generateScatter(male_age, male_data, female_age, female_data, item);
+            } else if (item == 'chest_pain_type'){
+                
             }
         });
     });
