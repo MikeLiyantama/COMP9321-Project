@@ -216,7 +216,8 @@ def predict_target(user_input):
            'num_major_vessels':data[:,11], 'thal':data[:,12]})
 
     newdf = vec.transform(df.to_dict(orient='record'))
-    prediction = dtc.predict(newdf)
+    prediction = dtc.predict(newdf)[0]
     return prediction
+
 
 important_factors()
