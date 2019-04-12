@@ -12,8 +12,8 @@ from flask_restplus import reqparse
 import os
 import predict.py
 
+""" create a database connection to a SQLite database """
 def create_db(db_file):
-	""" create a database connection to a SQLite database """
 	if os.path.isfile(db_file):
 		db_exists = True
 	else:
@@ -29,7 +29,7 @@ def create_db(db_file):
 
 """inject csv to the dataframe"""
 def load_csv():
-	df = pd.read_csv('processed.cleveland.csv')
+	df = pd.read_csv('data/processed.cleveland.csv')
 	cnx = sqlite3.connect('data.db')
 	sql.to_sql(df, name = 'data', con=cnx, if_exists='append')
 	cnx.commit()
