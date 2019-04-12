@@ -109,7 +109,7 @@ function generateScatter(male_age, male_data, female_age, female_data, item){
                 }
             },
             yaxis: {
-                title: 'Max Heart Rate',
+                title: column_alias[item],
                 titlefont: {
                     family: 'Arial, sans-serif',
                     size: 18
@@ -117,5 +117,5 @@ function generateScatter(male_age, male_data, female_age, female_data, item){
             },
         }
         var data = [male, female];
-        Plotly.newPlot('stats-results', data, layout);
+        Plotly.newPlot('stats-results', data, layout,  {responsive: true});
 }
