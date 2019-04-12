@@ -13,8 +13,7 @@ import os
 from predict import important_factors
 from predict import predict_target
 # import another python file
-from gevent.pywsgi import WSGIServer
-#test
+
 
 """ create a database connection to a SQLite database """
 def create_db(db_file):
@@ -103,6 +102,3 @@ if __name__ == '__main__':
 	db_file = 'data.db'
 	create_db(db_file)
 	app.run(debug=True)
-	#test
-	http_server = WSGIServer(('', 5000), app)
-	http_server.serve_forever()
