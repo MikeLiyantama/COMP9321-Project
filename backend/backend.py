@@ -83,6 +83,17 @@ class user_input_Prediction(Resource):
 		else:
 			return {'message' : 'ERROR:invalid input' } , 400
 
+'''api for important factors'''
+@api.route('/backend/')
+class important_factors_weights(Resource):
+	@api.response(200, 'Success')
+	def post(self):
+		dict_weights = important_factors()
+		return dict_weights, 200
+		
+
+
+
 if __name__ == '__main__':
 	db_file = 'data.db'
 	create_db(db_file)
