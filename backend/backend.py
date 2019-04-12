@@ -77,7 +77,9 @@ class user_input_Prediction(Resource):
 		L = list()
 		L.append(json_obj['age'], json_obj['sex'], json_obj['chest_pain_type'],json_obj['resting_blood_pressure'],json_obj['serum_cholestoral'],json_obj['fasting_blood_sugar'],json_obj['resting_electrocardiographic'],json_obj['max_heart_rate'],json_obj['exercise_induced_agina'],json_obj['oldpeak'],json_obj['slope_of_peak_ST_segment'],json_obj['num_major_vessels'],json_obj['thal'])
 		if L.isnumeric() == True:
-			return predict_target(L),200
+			predict_num = predict_target(L)
+			df = {'target' : predict_num}
+			return df_to_json(df) , 200
 		else:
 			return {'message' : 'ERROR:invalid input' } , 404
 
