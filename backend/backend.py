@@ -61,7 +61,11 @@ class FrontR(Resource):
 			df = {'age' : df['age'],
 			'sex' : df['sex'],
 			feature_name : df[feature_name]}
+
 		return df_to_json(df),200
+
+			
+
 
 
 '''api for user_input for target Prection'''
