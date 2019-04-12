@@ -22,7 +22,7 @@ def create_db(db_file):
 	except Error as e:
 		print(Error)
 	finally:
-		if db_exists = False:
+		if db_exists == False:
 			load_csv()
 		cnx.close()
 
@@ -58,12 +58,11 @@ class FrontR(Resource):
 		if feature_name.isnumeric() == True:
 			return {'message' : 'ERROR:invalid input' } , 404
 		else:
-			df = df.loc['age','sex',feature_name]
+			df = {'age' : df['age'],
+			'sex' : df['sex'],
+			feature_name : df[feature_name]}
 			return df_to_json(df),200
 
-		#{ 'age ' : df['age'],
-		#  'sex ' : df['sex'],
-		#  feature_name : df[feature_name]}
 
 
 '''api for NN'''
@@ -82,5 +81,4 @@ class NNet(Resource):
 if __name__ == '__main__':
 	db_file = 'data.db'
 	create_db(db_file)
-	load_csv()
 	app.run(debug=True)
