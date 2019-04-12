@@ -4,6 +4,7 @@ from sklearn.feature_extraction import DictVectorizer
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import classification_report
 import numpy as np
+from sklearn.model_selection import KFold
 
 def important_factors():
     #read clean csv
@@ -28,9 +29,14 @@ def important_factors():
            'exercise_induced_agina', 'oldpeak', 'slope_of_peak_ST_segment',
            'num_major_vessels', 'thal']]
     y = data[['target']]
-
+    
     # # split to training set and test set
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state = 10)
+    kf = KFold(n_splits=5)
+    for train_index, test_index in kf.split(X):
+       X_train, X_test = X[train_index], X[test_index]
+       y_train, y_test = y[train_index], y[test_index]
+    
+ #  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state = 10)
 
     # scikit-learn.feature_extraction
     vec = DictVectorizer(sparse=False)
@@ -80,3 +86,5 @@ def predict_target(user_input):
     newdf = vec.transform(df.to_dict(orient='record'))
     prediction = dtc.predict(newdf)
     return prediction
+
+important_factors()
