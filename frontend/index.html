@@ -15,8 +15,9 @@
                 <div class="row">
                     <div class="col s12">
                         <ul class="tabs">
-                            <li class="tab col s6"><a href="#stats-tab" class="active">Statistics</a></li>
-                            <li class="tab col s6"><a href="#prediction-tab">Prediction</a></li>
+                            <li class="tab col s4"><a href="#stats-tab" class="active" id="stat-tab-btn">Statistics</a></li>
+                            <li class="tab col s4"><a href="#important-val-tab" id="important-val-tab-btn">Feature Importance</a></li>
+                            <li class="tab col s4"><a href="#prediction-tab" id="pred-tab-btn">Prediction</a></li>
                         </ul>
                     </div>
                 </div>
@@ -38,16 +39,45 @@
                         </div>
                     </div>
                 </div>
-                <div class="row hidden">
+                <div class="row">
                     <div id="stats-results">
-                        <p>INSERT GRAPH HERE</p>
-                        <!--------INSERT GRAPH HERE--------->
+                       
                     </div>
                 </div>
+
+                <div class="row">
+                    <div id="important-val-tab">
+                        <div id="important-val-result">
+
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div id="prediction-tab">
                         <form class="col s12">
                             <div class="row">
+                                <div class="input-field col s12 prediction-input">
+                                    <input id="age" type="text">
+                                    <label for="age">Age</label>
+                                </div>
+                                <div class="input-field col s12 prediction-input">
+                                    <select id="sex">
+                                        <option value="" disabled selected>Choose Sex</option>
+                                        <option value="1">Male</option>
+                                        <option value="0">Female</option>
+                                    </select>
+                                </div>
+                                <div class="input-field col s12 prediction-input">
+                                    <select id="chest_pain_type">
+                                        <option value="" disabled selected>Choose Chest Pain Type</option>
+                                        <option value="1">Angin</option>
+                                        <option value="2">Atypical Angina</option>
+                                        <option value="3">Non-Anginal Pain</option>
+                                        <option value="4">Asymptomatic</option>
+                                    </select>
+                                    <label>Chest Pain Type</label>
+                                </div>
                                 <div class="input-field col s12 prediction-input">
                                     <input id="resting-blood-pressure" type="text">
                                     <label for="resting-blood-pressure">Resting Blood Pressure</label>
@@ -68,14 +98,37 @@
                                     <input id="max-heart-rate" type="text">
                                     <label for="max-heart-rate">Maximum Heart Rate</label>
                                 </div>
-
+                                <div class="input-field col s12 prediction-input">
+                                    <input id="exercise-induced-agina" type="text">
+                                    <label for="exercise-induced-agina">Exercise Induced Angina</label>
+                                </div>
+                                <div class="input-field col s12 prediction-input">
+                                    <input id="oldpeak" type="text">
+                                    <label for="oldpeak">Oldpeak</label>
+                                </div>
+                                <div class="input-field col s12 prediction-input">
+                                    <input id="slope-of-peak-ST-segment" type="text">
+                                    <label for="slope-of-peak-ST-segment">Slope of peak exercise ST segment</label>
+                                </div>
+                                <div class="input-field col s12 prediction-input">
+                                    <input id="num-major-vessels" type="text">
+                                    <label for="num-major-vessels">Number of Major Vessels</label>
+                                </div>
+                                <div class="input-field col s12 prediction-input">
+                                    <select id="thal">
+                                        <option value="" disabled selected>Choose Chest Pain Type</option>
+                                        <option value="3">Normal</option>
+                                        <option value="6">Fixed Defect</option>
+                                        <option value="7">Reversable Defect</option>
+                                    </select>
+                                    <label>Thalassemia</label>
+                                </div>
                                 <a class="btn waves-effect waves-light" id="predict-submit-button">Predict!</a>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="row hidden" id="prediction-result">
-                    <p>PREDICTION RESULT HERE</p>
                     <!----------PREDICTION RESULT HERE-------->
                 </div>
             </div>
