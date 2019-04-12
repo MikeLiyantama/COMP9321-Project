@@ -47,9 +47,9 @@ class FrontR(Resource):
 		cnx.commit()
 		cnx.close()
 		if df.feature_name.unique() == None:
-			return 'ERROR:feature does not exist',404
+			return {'message' : 'ERROR:feature does not exist'},404
 		if feature_name.isnumeric() == True:
-			return 'ERROR:invalid input',404
+			return {'message' : 'ERROR:invalid input' } , 404
 		else:
 			df = df.loc['age','sex',feature_name]
 			return df_to_json(df),200
