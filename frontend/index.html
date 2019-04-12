@@ -15,8 +15,9 @@
                 <div class="row">
                     <div class="col s12">
                         <ul class="tabs">
-                            <li class="tab col s6"><a href="#stats-tab" class="active" id="stat-tab-btn">Statistics</a></li>
-                            <li class="tab col s6"><a href="#prediction-tab" id="pred-tab-btn">Prediction</a></li>
+                            <li class="tab col s4"><a href="#stats-tab" class="active" id="stat-tab-btn">Statistics</a></li>
+                            <li class="tab col s4"><a href="#important-val-tab" id="important-val-tab-btn">Feature Importance</a></li>
+                            <li class="tab col s4"><a href="#prediction-tab" id="pred-tab-btn">Prediction</a></li>
                         </ul>
                     </div>
                 </div>
@@ -43,6 +44,15 @@
                        
                     </div>
                 </div>
+
+                <div class="row">
+                    <div id="important-val-tab">
+                        <div id="important-val-result">
+
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div id="prediction-tab">
                         <form class="col s12">
@@ -101,8 +111,8 @@
                                     <label for="slope-of-peak-ST-segment">Slope of peak exercise ST segment</label>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
-                                    <input id="num_major_vessels" type="text">
-                                    <label for="num_major_vessels">Number of Major Vessels</label>
+                                    <input id="num-major-vessels" type="text">
+                                    <label for="num-major-vessels">Number of Major Vessels</label>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
                                     <select id="thal">
