@@ -81,7 +81,7 @@ class user_input_Prediction(Resource):
 			df = {'target' : predict_num}
 			return df_to_json(df) , 200
 		else:
-			return {'message' : 'ERROR:invalid input' } , 404
+			return {'message' : 'ERROR:invalid input' } , 400
 
 if __name__ == '__main__':
 	db_file = 'data.db'
