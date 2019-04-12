@@ -24,7 +24,7 @@ def create_db(db_file):
 def load_csv():
 	df = pd.read_csv('processed.cleveland.csv')
 	cnx = sqlite3.connect('data.db')
-	sql.to_sql(df, name = 'data', con=cnx, if_exists='append') #???
+	sql.to_sql(df, name = 'data', con=cnx, if_exists='append')
 	cnx.commit()
 	cnx.close()
 
@@ -55,6 +55,9 @@ class FrontR(Resource):
 			df = df.loc['age','sex',feature_name]
 			return df_to_json(df),200
 
+		#{ 'age ' : df['age'],
+		#  'sex ' : df['sex'],
+		#  feature_name : df[feature_name]}
 
 
 '''api for NN'''
@@ -68,12 +71,12 @@ class NNet(Resource):
 		if L.isnumeric() == True:
 			return L,200
 		else:
-			return {'message' : 'ERROR:invalid input'}, 404
+			return {'message' : 'ERROR:invalid input' } , 404
 
 if __name__ == '__main__':
 	db_file = 'data.db'
 	create_db(db_file)
-	#app.run(debug=True)
 	load_csv()
+	#app.run(debug=True)
 	http_server = WSGIServer(('', 5000), app)
 	http_server.serve_forever()
