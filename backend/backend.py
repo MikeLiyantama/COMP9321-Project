@@ -10,6 +10,7 @@ from flask_restplus import fields
 from flask_restplus import inputs
 from flask_restplus import reqparse
 import os
+import predict.py
 
 def create_db(db_file):
 	""" create a database connection to a SQLite database """
@@ -67,16 +68,16 @@ class FrontR(Resource):
 			
 
 '''api for user_input for target Prediction'''
-@api.route('/backend')
+@api.route('/backend/<json_obj>')
 class user_input_Prediction(Resource):
 	@api.response(200, 'Success')
 	@api.response(404, 'Error:Resource does not exist')
-	def get(self, json_obj):
+	def post(self, json_obj):
                 #get a json_obj of single record as user_input
 		L = list()
 		L.append(json_obj['age'], json_obj['sex'], json_obj['chest_pain_type'],json_obj['resting_blood_pressure'],json_obj['serum_cholestoral'],json_obj['fasting_blood_sugar'],json_obj['resting_electrocardiographic'],json_obj['max_heart_rate'],json_obj['exercise_induced_agina'],json_obj['oldpeak'],json_obj['slope_of_peak_ST_segment'],json_obj['num_major_vessels'],json_obj['thal'])
 		if L.isnumeric() == True:
-			return L,200
+			return predict_target(L),200
 		else:
 			return {'message' : 'ERROR:invalid input' } , 404
 
