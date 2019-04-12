@@ -66,11 +66,9 @@ class FrontR(Resource):
 
 			
 
-
-
-'''api for user_input for target Prection'''
+'''api for user_input for target Prediction'''
 @api.route('/backend')
-class user_input_Prection(Resource):
+class user_input_Prediction(Resource):
 	@api.response(200, 'Success')
 	@api.response(404, 'Error:Resource does not exist')
 	def get(self, json_obj):
