@@ -10,7 +10,9 @@ from flask_restplus import fields
 from flask_restplus import inputs
 from flask_restplus import reqparse
 import os
-import predict.py
+from predict import important_factors
+from predict import predict_target
+# import another python file
 
 """ create a database connection to a SQLite database """
 def create_db(db_file):
