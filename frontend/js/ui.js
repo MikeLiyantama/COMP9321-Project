@@ -3,6 +3,22 @@ const url_const = {
     predict : 'http://127.0.0.1/predict' 
 };
 
+const column_alias = {
+    age : 'Age',
+    sex : 'Sex',
+    chest_pain_type : 'Chest Pain Type',
+    resting_blood_pressure : 'Resting Blood Pressure',
+    serum_cholestoral : 'Serum Cholestoral',
+    fasting_blood_sugar : 'Fasting Blood Value',
+    resting_electrocardiographic : 'Resting Electrocardiographic',
+    max_heart_rate : 'Max Heart Rate',
+    exercise_induced_angina : 'Exercise Induced Angina',
+    oldpeak : 'Oldpeak',
+    slope_of_peak_ST_segment : 'Slope of peak of ST Segment',
+    num_major_vessel : 'Number of major vessels',
+    thal : 'Thalassemia',
+    target : 'Disease status'
+}
 
 M.AutoInit();
 
@@ -32,6 +48,10 @@ $(document).ready(function() {
                     female_data.push(data[item][i]);
                 }
             }
+            
+            if(item == 'max_heart_rate' || item == 'resting_blood_pressure' || item == 'serum_cholestoral' || item == 'oldpeak'){
+                generateScatter(male_age, male_data, female_age, female_data, item);
+            }
         });
     });
 
@@ -60,3 +80,42 @@ $(document).ready(function() {
         })
     });
 });
+
+//Plotly Helper
+
+function generateScatter(male_age, male_data, female_age, female_data, item){
+        var male = {
+            x : male_age,
+            y : male_data,
+            mode: 'markers',
+            type: 'scatter',
+            name: 'Male'
+        }
+
+        var female = {
+            x : female_age,
+            y : female_data,
+            mode: 'markers',
+            type: 'scatter',
+            name: 'Female'
+        }
+
+        var layout = {
+            xaxis: {
+                title: 'Age',
+                titlefont: {
+                    family: 'Arial, sans-serif',
+                    size: 18
+                }
+            },
+            yaxis: {
+                title: 'Max Heart Rate',
+                titlefont: {
+                    family: 'Arial, sans-serif',
+                    size: 18
+                }
+            },
+        }
+        var data = [male, female];
+        Plotly.newPlot('stats-results', data, layout);
+}
