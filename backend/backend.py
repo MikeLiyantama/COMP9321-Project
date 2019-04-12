@@ -70,16 +70,19 @@ class FrontR(Resource):
 			
 
 '''api for user_input for target Prediction'''
-@api.route('/backend/<json_obj>')
+@api.route('/backend')
 class user_input_Prediction(Resource):
 	@api.response(200, 'Success')
 	@api.response(400, 'Error')
-	def post(self, json_obj):
+	def post(self):
+		data = api.payload
         #get a json_obj of single record as user_input
 		L = list()
-		L.append(json_obj['age'], json_obj['sex'], json_obj['chest_pain_type'],json_obj['resting_blood_pressure'],json_obj['serum_cholestoral'],json_obj['fasting_blood_sugar'],json_obj['resting_electrocardiographic'],json_obj['max_heart_rate'],json_obj['exercise_induced_agina'],json_obj['oldpeak'],json_obj['slope_of_peak_ST_segment'],json_obj['num_major_vessels'],json_obj['thal'])
+		L.append(data['age'], data['sex'], data['chest_pain_type'],data['resting_blood_pressure'],data['serum_cholestoral'],data['fasting_blood_sugar'],data['resting_electrocardiographic'],data['max_heart_rate'],data['exercise_induced_agina'],data['oldpeak'],data['slope_of_peak_ST_segment'],data['num_major_vessels'],data['thal'])
 		if L.isnumeric() == True:
-			predict_num = predict_target(L)
+			Li = list()
+			Li.append(L)
+			predict_num = predict_target(Li)
 			#sent as json
 			df = {'target' : list(predict_num)}
 			return df , 200
@@ -88,7 +91,7 @@ class user_input_Prediction(Resource):
 
 
 '''api for important factors'''
-@api.route('/backend/')
+@api.route('/important')
 class important_factors_weights(Resource):
 	@api.response(200, 'Success')
 	def post(self):
