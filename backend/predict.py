@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 #read clean csv
 data = pd.read_csv('data/processed.cleveland.csv')
@@ -110,7 +111,7 @@ te_best_index = np.argmax(te_scores)
 print("bestdepth:", te_best_index+1, " bestdepth_score:", te_scores[te_best_index], '\n')
 
 
-get_ipython().run_line_magic('matplotlib', 'inline')
+#get_ipython().run_line_magic('matplotlib', 'inline')
 from matplotlib import pyplot as plt
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3)
 
@@ -140,8 +141,6 @@ plt.plot(vals, tr_scores, label='train_scores')
 
 plt.legend()
 
-import numpy as np
-from sklearn.model_selection import KFold
 
 def important_factors():
     #read clean csv
@@ -167,13 +166,8 @@ def important_factors():
            'num_major_vessels', 'thal']]
     y = data[['target']]
     
-    # # split to training set and test set
-    kf = KFold(n_splits=5)
-    for train_index, test_index in kf.split(X):
-       X_train, X_test = X[train_index], X[test_index]
-       y_train, y_test = y[train_index], y[test_index]
     
- #  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state = 10)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state = 10)
 
     # scikit-learn.feature_extraction
     vec = DictVectorizer(sparse=False)
