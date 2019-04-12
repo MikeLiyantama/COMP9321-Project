@@ -9,14 +9,21 @@ from flask_restplus import Resource, Api
 from flask_restplus import fields
 from flask_restplus import inputs
 from flask_restplus import reqparse
+import os
 
 def create_db(db_file):
 	""" create a database connection to a SQLite database """
+	if os.path.isfile(db_file):
+		db_exists = True
+	else:
+		db_exists = False
 	try:
 		cnx = sqlite3.connect(db_file)
 	except Error as e:
 		print(Error)
 	finally:
+		if db_exists = False:
+			load_csv()
 		cnx.close()
 
 """inject csv to the dataframe"""
