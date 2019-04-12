@@ -9,14 +9,21 @@ from flask_restplus import Resource, Api
 from flask_restplus import fields
 from flask_restplus import inputs
 from flask_restplus import reqparse
+import os
 
 def create_db(db_file):
 	""" create a database connection to a SQLite database """
+	if os.path.isfile(db_file):
+		db_exists = True
+	else:
+		db_exists = False
 	try:
 		cnx = sqlite3.connect(db_file)
 	except Error as e:
 		print(Error)
 	finally:
+		if db_exists == False:
+			load_csv()
 		cnx.close()
 
 """inject csv to the dataframe"""
@@ -47,26 +54,25 @@ class FrontR(Resource):
 		cnx.commit()
 		cnx.close()
 		if df.feature_name.unique() == None:
-			return 'ERROR:feature does not exist',404
+			return {'message' : 'ERROR:feature does not exist'},404
 		if feature_name.isnumeric() == True:
-			return 'ERROR:invalid input',404
+			return {'message' : 'ERROR:invalid input' } , 404
 		else:
-			df = df.loc['age','sex',feature_name]
-			return df_to_json(df),200
-
-		#{ 'age ' : df['age'],
-		#  'sex ' : df['sex'],
-		#  feature_name : df[feature_name]}
+			df = {'age' : df['age'],
+			'sex' : df['sex'],
+			feature_name : df[feature_name]}
+		return df_to_json(df),200
 
 
-'''api for NN'''
+'''api for user_input for target Prection'''
 @api.route('/backend')
-class NNet(Resource):
+class user_input_Prection(Resource):
 	@api.response(200, 'Success')
 	@api.response(404, 'Error:Resource does not exist')
-	def get(self, age,sex,chest_pain_type,resting_blood_pressure,serum_cholestoral,fasting_blood_sugar,resting_electrocardiographic,max_heart_rate,exercise_induced_agina,oldpeak,slope_of_peak_ST_segment,num_major_vessels,thal):
+	def get(self, json_obj):
+                #get a json_obj of single record as user_input
 		L = list()
-		L.append('age', 'sex', 'chest_pain_type', 'resting_blood_pressure', 'serum_cholestoral', 'fasting_blood_sugar', 'resting_electrocardiographic', 'max_heart_rate', 'exercise_induced_agina', 'oldpeak', 'slope_of_peak_ST_segment', 'num_major_vessels', 'thal')
+		L.append(json_obj['age'], json_obj['sex'], json_obj['chest_pain_type'],json_obj['resting_blood_pressure'],json_obj['serum_cholestoral'],json_obj['fasting_blood_sugar'],json_obj['resting_electrocardiographic'],json_obj['max_heart_rate'],json_obj['exercise_induced_agina'],json_obj['oldpeak'],json_obj['slope_of_peak_ST_segment'],json_obj['num_major_vessels'],json_obj['thal'])
 		if L.isnumeric() == True:
 			return L,200
 		else:
@@ -75,5 +81,4 @@ class NNet(Resource):
 if __name__ == '__main__':
 	db_file = 'data.db'
 	create_db(db_file)
-	load_csv()
 	app.run(debug=True)
