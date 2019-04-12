@@ -2,8 +2,6 @@
 
 ## Introduction
 
-![](https://flic.kr/p/2epsBrN)
-
 In this assignment, we completed a web app based on a heart diease dataset and use machine learning algorithms to make predictions on important factors relevant to heart dieases.
 
 Firstly,we divide our project into two part: backend and frontend.
@@ -23,24 +21,24 @@ Besides, frontend is another part of this project for the service to users.
  - Backend
  - README.md
 
-### RawData
+## RawData
 Dataset from http://www.cse.unsw.edu.au/~cs9321/19T1/assn/heart.tar.
 
-### DataCleaning
+## DataCleaning
  - Convert data to csv format
  - Drop Invalid Data
  - Fill Missing Data By Median or Average
 
-### ModelsTrainning
+## ModelsTrainning
  - Building decision tree model to make prediction
 
-### Optimization Algorithm
+## Optimization Algorithm
  - Use Cross validation method to improve accuracy of prediction
 
-### Frontend
+## Frontend
  - Use javascript to building frontend interface
  
-### API
+## API
  - Use python to create api functions
 
 ## Communication Chanel
@@ -49,6 +47,7 @@ Dataset from http://www.cse.unsw.edu.au/~cs9321/19T1/assn/heart.tar.
 
 ## Repo
 [COMP9321 Ass3](https://github.com/MikeLiyantama/COMP9321-Project)
+![](https://flic.kr/p/2epsBrN)
 
 ## Manual
 ```
