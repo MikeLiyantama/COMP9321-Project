@@ -35,6 +35,9 @@ Dataset from http://www.cse.unsw.edu.au/~cs9321/19T1/assn/heart.tar.
 ## Optimization Algorithm
  - Use Cross validation method to improve accuracy of prediction
 
+## Cluster for bonus
+ - Use Kmeans and PCA method to cluster features
+ 
 ## Frontend
  - Use javascript to building frontend interface
  
