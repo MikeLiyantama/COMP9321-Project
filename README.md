@@ -31,9 +31,10 @@ Dataset from http://www.cse.unsw.edu.au/~cs9321/19T1/assn/heart.tar.
 
 ## ModelsTrainning
  - Building decision tree model to make prediction
+   To model decision tree classifier we used the information gain, and entropy split criteria.We also calucalte the accuracy of our decision tree model.
 
 ## Optimization Algorithm
- - Use Cross validation method to improve accuracy of prediction
+ - Use Cross-validation method to improve accuracy of prediction
 
 ## Cluster for bonus
  - Use Kmeans and PCA method to cluster features
