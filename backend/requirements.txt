@@ -1,3 +1,6 @@
-Flask == 1.0.2
-flask-restplus == 0.12.1
-pandas == 0.24.2
+numpy==1.15.1
+matplotlib==2.2.3
+Flask==1.0.2
+flask_restplus==0.12.1
+pandas==0.24.2
+scikit_learn==0.20.3
