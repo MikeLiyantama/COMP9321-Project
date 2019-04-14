@@ -16,7 +16,7 @@ const column_alias = {
     exercise_induced_agina : 'Exercise Induced Angina',
     oldpeak : 'Oldpeak',
     slope_of_peak_ST_segment : 'Slope of peak of ST Segment',
-    num_major_vessel : 'Number of major vessels',
+    num_major_vessels : 'Number of major vessels',
     thal : 'Thalassemia',
     target : 'Disease status'
 }
@@ -79,44 +79,17 @@ $(document).ready(function() {
         })
         .then(res => res.json())
         .then(data=> {
-            if(data['result'] == 0) {
-                //Add some texts Indicating user doesn't have disease
-            } else if (data['result'] == 1){
-                //Add some texts Indicating user has disease
+            if(data['target'] == 0) {
+                $('#prediction-result-text').text( 'Congratulations, based on our prediction, you are free of heart disease');
+            } else if (data['target'] == 1){
+                $('#prediction-result-text').text('We are sorry, based on our prediction, you might be having heart disease');
             } else {
-                //Throw error
+                $('#prediction-result-text').text('Error, please check your inputs');
             }
         })
     });
-    /*
-    $('#stat-tab-btn').click(function(e){
-        var pred_res = document.getElementById('prediction-result');
-        var stat_res = document.getElementById('stats-results');
-        var imp_val_res = document.getElementById('important-val-result');
-        pred_res.classList.add('hidden');
-        imp_val_res.classList.add('hidden');
-        stat_res.classList.remove('hidden');
-    });
-    
-    $('#pred-tab-btn').click(function(e){
-        var pred_res = document.getElementById('prediction-result');
-        var stat_res = document.getElementById('stats-results');
-        var imp_val_res = document.getElementById('important-val-result');
-        pred_res.classList.remove('hidden');
-        imp_val_res.classList.add('hidden');
-        stat_res.classList.add('hidden');
-    });
-    $('#important-val-tab-btn').click(function(e){
-        var pred_res = document.getElementById('prediction-result');
-        var stat_res = document.getElementById('stats-results');
-        var imp_val_res = document.getElementById('important-val-result');
-        pred_res.classList.add('hidden');
-        imp_val_res.classList.remove('hidden');
-        stat_res.classList.add('hidden');
-    })
-    */
 
-    //generateImportantVal();
+    generateImportantVal();
 });
 
 //Plotly Helper
@@ -128,9 +101,26 @@ function generateImportantVal(){
     })
     .then(res => res.json())
     .then(data => {
-        console.log(data);
+        let values = [];
+        let labels = [] 
+        for(const[key, value] of Object.entries(data)){
+            labels.push(key);
+            values.push(value);
+        }
+        console.log(values);
+        
+        labels = labels.map(x => column_alias[x]);
+        console.log(labels);
+        var chart_data = [{
+            values : values,
+            labels : labels,
+            type: 'pie'
+        }];
 
-        //Plotly.newPlot('important-val-result', chart_data, layout, {responsive : true});
+        var layout = {
+            title : 'Important Features that Influence Heart Disease'
+        };
+        Plotly.newPlot('important-val-result', chart_data, layout, {responsive : true});
     });
 }
 
@@ -295,7 +285,24 @@ function generateCPT(data, item){
     };
 
     var data = [male_1, male_2, male_3, male_4];
-    var layout = {barmode : 'group'};
+    var layout = {
+        title: 'Chest Pain Statistics (Male)',
+        barmode : 'group',
+        xaxis: {
+            title: 'Age',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        },
+        yaxis: {
+            title : '(n)',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        }
+    };
 
     Plotly.newPlot('stats-results-1', data, layout, {responsive : true});
 
@@ -330,7 +337,24 @@ function generateCPT(data, item){
     };
 
     var data = [female_1, female_2, female_3, female_4];
-    var layout = {barmode : 'group'};
+    var layout = {
+        title: 'Chest Pain Statistics (Female)',
+        barmode : 'group',
+        xaxis: {
+            title: 'Age',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        },
+        yaxis: {
+            title : '(n)',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        }
+    };
 
     Plotly.newPlot('stats-results-2', data, layout, {responsive : true});
 }
@@ -400,8 +424,25 @@ function generateFBS(data, item){
         name : 'Male, w/ FBS <= 120mg/dl'
     };
 
-    var data = [trace1, trace2, trace3, trace4, ];
-    var layout = {barmode : 'group'};
+    var data = [trace1, trace2, trace3, trace4];
+    var layout = {
+        title: 'Fasting Blood Sugar Statistics by Gender',
+        barmode : 'group',
+        xaxis: {
+            title: 'Age',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        },
+        yaxis: {
+            title : '(n)',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        }
+    };
 
     Plotly.newPlot('stats-results-1', data, layout, {responsive : true});
 }
@@ -471,7 +512,24 @@ function generateEIA(data, item){
     };
 
     var data = [trace1, trace2, trace3, trace4, ];
-    var layout = {barmode : 'group'};
+    var layout = {
+        title: 'Exercise Induced Angina by Gender',
+        barmode : 'group',
+        xaxis: {
+            title: 'Age',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        },
+        yaxis: {
+            title : '(n)',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        }
+    };
 
     Plotly.newPlot('stats-results-1', data, layout, {responsive : true});
 }
@@ -531,8 +589,23 @@ function generateRE(data, item){
 
     var data = [male_0, male_1, male_2];
     var layout = {
-                    barmode : 'group', 
-                };
+        title: 'Resting Electrocardiographics Results (Male)',
+        barmode : 'group',
+        xaxis: {
+            title: 'Age',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        },
+        yaxis: {
+            title : '(n)',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        }
+    };
 
     Plotly.newPlot('stats-results-1', data, layout, {responsive : true});
 
@@ -549,19 +622,34 @@ function generateRE(data, item){
         x : ['0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'],
         y : getDataList('1', data_female),
         type : 'bar',
-        name : 'having ST-T wave abnormality (T wave inversions) and/or ST elevation or depression'
+        name : 'Having ST-T wave abnormality'
     };
 
     var female_2= {
         x : ['0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'],
         y : getDataList('2', data_female),
         type : 'bar',
-        name : 'showing probable or definite left ventricular hypertrophy by Estes’ criteria'
+        name : 'showing probable or definite left ventricular hypertrophy'
     };
 
     var data = [female_0, female_1, female_2];
     var layout = {
+        title: 'Resting Electrocardiographics Results (Female)',
         barmode : 'group',
+        xaxis: {
+            title: 'Age',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        },
+        yaxis: {
+            title : '(n)',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        }
     };
 
     Plotly.newPlot('stats-results-2', data, layout, {responsive : true});
@@ -631,8 +719,23 @@ function generateNMV(data, item){
 
     var data = [male_0, male_1, male_2, male_3];
     var layout = {
-                    barmode : 'group', 
-                };
+        title: 'No. of Major Vessels Results (Male)',
+        barmode : 'group',
+        xaxis: {
+            title: 'Age',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        },
+        yaxis: {
+            title : '(n)',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        }
+    };
 
     Plotly.newPlot('stats-results-1', data, layout, {responsive : true});
 
@@ -668,7 +771,22 @@ function generateNMV(data, item){
 
     var data = [female_0, female_1, female_2, female_3];
     var layout = {
+        title: 'No. of Major Vessels Results (Female)',
         barmode : 'group',
+        xaxis: {
+            title: 'Age',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        },
+        yaxis: {
+            title : '(n)',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        }
     };
 
     Plotly.newPlot('stats-results-2', data, layout, {responsive : true});
@@ -729,8 +847,23 @@ function generateSlope(data, item){
 
     var data = [male_1, male_2, male_3];
     var layout = {
-                    barmode : 'group', 
-                };
+        title: 'ST Segment Slope Results (Male)',
+        barmode : 'group',
+        xaxis: {
+            title: 'Age',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        },
+        yaxis: {
+            title : '(n)',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        }
+    };
 
     Plotly.newPlot('stats-results-1', data, layout, {responsive : true});
 
@@ -759,7 +892,22 @@ function generateSlope(data, item){
 
     var data = [female_1, female_2, female_3];
     var layout = {
+        title: 'ST Segment Slope Results (Female)',
         barmode : 'group',
+        xaxis: {
+            title: 'Age',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        },
+        yaxis: {
+            title : '(n)',
+            titlefont: {
+                family: 'Arial, sans-serif',
+                size: 18
+            }
+        }
     };
 
     Plotly.newPlot('stats-results-2', data, layout, {responsive : true});

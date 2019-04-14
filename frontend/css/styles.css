@@ -6,3 +6,7 @@ html, body {
 .hidden {
     display: none;
 }
+
+#prediction-result-text{
+    font-weight: bold;
+}

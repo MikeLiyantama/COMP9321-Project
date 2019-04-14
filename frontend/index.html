@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="input-field col s12 prediction-input">
                                     <select id="num-major-vessels">
-                                        <option value="" disabled selected>Choose Chest Pain Type</option>
+                                        <option value="" disabled selected>Choose No. of Major Vessels</option>
                                         <option value="0">0</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -146,7 +146,7 @@
                                 </div>
                                 <div class="input-field col s12 prediction-input">
                                     <select id="thal">
-                                        <option value="" disabled selected>Choose Chest Pain Type</option>
+                                        <option value="" disabled selected>Choose Thalassemia</option>
                                         <option value="3">Normal</option>
                                         <option value="6">Fixed Defect</option>
                                         <option value="7">Reversable Defect</option>
@@ -156,10 +156,10 @@
                                 <a class="btn waves-effect waves-light" id="predict-submit-button">Predict!</a>
                             </div>
                         </form>
+                        <div class="row" id="prediction-result">
+                            <p id="prediction-result-text" align="center"></p>
+                        </div>
                     </div>
-                </div>
-                <div class="row hidden" id="prediction-result">
-                    <!----------PREDICTION RESULT HERE-------->
                 </div>
             </div>
         </main>
