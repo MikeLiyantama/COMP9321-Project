@@ -101,10 +101,10 @@ class Prediction(Resource):
 
 
 '''api for important factors'''
-@api.route('/important')
-class important_factors_weights(Resource):
+@api.route('/important_val')
+class ImportantFactors(Resource):
 	@api.response(200, 'Success')
-	def post(self):
+	def get(self):
 		dict_weights = important_factors()
 		return dict_weights, 200
 		

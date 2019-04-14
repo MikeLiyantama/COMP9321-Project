@@ -203,7 +203,7 @@ def important_factors():
         print(i[0],'%.2f%%' % (i[1] * 100))
     print()
     print (classification_report(y_predict, y_test, target_names = ['no heart diease','have heart diease']))
-    return dict_of_weight
+    return {i[0] : i[1]*100 for i in dict_of_weight}
 
 #recieve a user_input and predict the target
 #receive this from api : user_input=[[63,1,1,145,233,1,2,150,0,2.3,3,0,6,0]]
