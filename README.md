@@ -7,7 +7,7 @@ In this assignment, we created a web app based on a heart diease dataset and use
 ## Organisation
 Firstly, we divide our project into two part: backend and frontend.
 Secondly, we use Machine Learning - decision tree algorithm to make prediction. 
-Then we use cross validation method to increase the accuracy of our predict result.
+Then we use cross validation method to increase the accuracy of the prediction.
  
 ## Tasks
  - **Dataset Collection**
@@ -31,7 +31,7 @@ Dataset from http://www.cse.unsw.edu.au/~cs9321/19T1/assn/heart.tar.
 
 ## ModelsTrainning
  - Building decision tree model to make prediction
- - To model decision tree classifier we used the information gain, and entropy split criteria.We also calculate the accuracy of our decision tree model.
+ - As for decision tree classifier model,we used the information gain and entropy split criteria. We also calculated the accuracy of our decision tree model.
 
 ## Optimization Algorithm
  - Use Cross-validation method to improve accuracy of prediction
