@@ -65,4 +65,4 @@ $ http-server
    Open browser at http://localhost:8080
    
 ## Instructions for reproducing prediction model
-- Simply run predict.py and the model will be automaticly generated
+- Simply run predict.py and the model will be automatically generated
