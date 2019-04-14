@@ -90,15 +90,14 @@ class Prediction(Resource):
 		L.append(data['slope_of_peak_ST_segment'])
 		L.append(data['num_major_vessels'])
 		L.append(data['thal'])
-		if L.isnumeric() == True:
-			Li = list()
-			Li.append(L)
-			predict_num = predict_target(Li)
-			#sent as json
-			df = {'target' : list(predict_num)}
-			return df , 200
-		else:
-			return {'message' : 'ERROR:invalid input' } , 400
+		Li = list()
+		Li.append(L)
+		predict_num = predict_target(Li)
+		#sent as json
+		print(predict_num)
+		return {'target' : predict_num} , 200
+		#else:
+		#	return {'message' : 'ERROR:invalid input' } , 400
 
 
 '''api for important factors'''

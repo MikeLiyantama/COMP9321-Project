@@ -217,7 +217,7 @@ def predict_target(user_input):
 
     newdf = vec.transform(df.to_dict(orient='record'))
     prediction = dtc.predict(newdf)[0]
-    return prediction
+    return prediction.item()
 
 
 important_factors()

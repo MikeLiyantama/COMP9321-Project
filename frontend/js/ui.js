@@ -65,10 +65,10 @@ $(document).ready(function() {
             fasting_blood_sugar : parseInt($('#fasting-blood-sugar').val()),
             resting_electrocardiographic : parseInt($('#resting-electrocardiographic').val()),
             max_heart_rate : parseInt($('#max-heart-rate').val()),
-            exercise_induced_angina : parseInt($('#exercise-induced-agina').val()),
+            exercise_induced_agina : parseInt($('#exercise-induced-agina').val()),
             oldpeak : parseInt($('#oldpeak').val()),
             slope_of_peak_ST_segment : parseInt($('#slope-of-peak-ST-segment').val()),
-            num_major_vessel : parseInt($('#num-major-vessels').val()),
+            num_major_vessels : parseInt($('#num-major-vessels').val()),
             thal: parseInt($('#thal').val())
         }
 
@@ -497,7 +497,6 @@ function generateRE(data, item){
     data_female['2'] = {'10' : 0, '20': 0, '30': 0, '40': 0, '50': 0, '60' : 0, '70': 0, '80': 0, '90' : 0, '100' : 0};
     
     for(var i = 0; i < data['age'].length; i++){
-        console.log(data[item][i]);
         let tempCol = data[item][i].toString();
         if(data['sex'][i] == 1){
             for(const [key,value] of Object.entries(data_male[tempCol])){
@@ -528,14 +527,14 @@ function generateRE(data, item){
         x : ['0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'],
         y : getDataList('1', data_male),
         type : 'bar',
-        name : 'having ST-T wave abnormality (T wave inversions) and/or ST elevation or depression'
+        name : 'Having ST-T wave abnormality'
     };
 
     var male_2= {
         x : ['0-9','10-19','20-29','30-39','40-49','50-59','60-69','70-79','80-89','90-99'],
         y : getDataList('2', data_male),
         type : 'bar',
-        name : 'showing probable or definite left ventricular hypertrophy by Estes’ criteria'
+        name : 'Showing probable or definite left ventricular hypertrophy'
     };
 
     var data = [male_0, male_1, male_2];
@@ -591,7 +590,6 @@ function generateNMV(data, item){
     data_female['3'] = {'10' : 0, '20': 0, '30': 0, '40': 0, '50': 0, '60' : 0, '70': 0, '80': 0, '90' : 0, '100' : 0};
     
     for(var i = 0; i < data['age'].length; i++){
-        console.log(data[item][i]);
         let tempCol = data[item][i].toString();
         if(data['sex'][i] == 1){
             for(const [key,value] of Object.entries(data_male[tempCol])){

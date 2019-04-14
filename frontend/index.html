@@ -71,6 +71,7 @@
                                         <option value="" disabled selected>Choose Sex</option>
                                         <option value="1">Male</option>
                                         <option value="0">Female</option>
+                                        <label for="sex">Sex</label>
                                     </select>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
@@ -81,7 +82,7 @@
                                         <option value="3">Non-Anginal Pain</option>
                                         <option value="4">Asymptomatic</option>
                                     </select>
-                                    <label>Chest Pain Type</label>
+                                    <label for="chest_pain_type">Chest Pain Type</label>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
                                     <input id="resting-blood-pressure" type="text">
@@ -92,19 +93,31 @@
                                     <label for="serum-cholestoral">Serum Cholesteral</label>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
-                                    <input id="fasting-blood-sugar" type="text">
+                                    <select id="fasting-blood-sugar">
+                                        <option value="" disabled selected>Choose Yes/No</option>
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
                                     <label for="fasting-blood-sugar">Fasting Blood Sugar</label>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
-                                    <input id="resting-electrocardiographic" type="text">
-                                    <label for="resting-electrocardiographic">Resting Electrocardiographic</label>
+                                    <select id="fasting-blood-sugar">
+                                        <option value="" disabled selected>Choose Yes/No</option>
+                                        <option value="0">Normal</option>
+                                        <option value="1">Having ST-T wave abnormality</option>
+                                        <option value="2">Showing probable or definite left ventricular hypertrophy</option>
+                                    </select>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
                                     <input id="max-heart-rate" type="text">
                                     <label for="max-heart-rate">Maximum Heart Rate</label>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
-                                    <input id="exercise-induced-agina" type="text">
+                                    <select id="exercise-induced-agina">
+                                        <option value="" disabled selected>Choose Yes/No</option>
+                                        <option value="0">No</option>
+                                        <option value="1">Yes</option>
+                                    </select>
                                     <label for="exercise-induced-agina">Exercise Induced Angina</label>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
@@ -112,11 +125,23 @@
                                     <label for="oldpeak">Oldpeak</label>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
-                                    <input id="slope-of-peak-ST-segment" type="text">
+                                    <select id="slope-of-peak-ST-segment">
+                                        <option value="" disabled selected>Choose Slope Type</option>
+                                        <option value="1">Upsloping</option>
+                                        <option value="2">Flat</option>
+                                        <option value="3">Downsloping</option>
+                                    </select>
+                                    <label for="num-major-vessels">Number of Major Vessels</label>
                                     <label for="slope-of-peak-ST-segment">Slope of peak exercise ST segment</label>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
-                                    <input id="num-major-vessels" type="text">
+                                    <select id="num-major-vessels">
+                                        <option value="" disabled selected>Choose Chest Pain Type</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
                                     <label for="num-major-vessels">Number of Major Vessels</label>
                                 </div>
                                 <div class="input-field col s12 prediction-input">
