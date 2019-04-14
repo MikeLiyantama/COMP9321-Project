@@ -1,7 +1,7 @@
 const url_const = {
-    stats : 'http://127.0.0.1:5000/stats/',
-    predict : 'http://127.0.0.1:5000/predict',
-    important_val : 'http://127.0.0.1:5000/important_val'
+    stats : 'http://127.0.0.1:5000/api/stats/',
+    predict : 'http://127.0.0.1:5000/api/predict',
+    important_val : 'http://127.0.0.1:5000/api/important_factors'
 };
 
 const column_alias = {
@@ -128,17 +128,9 @@ function generateImportantVal(){
     })
     .then(res => res.json())
     .then(data => {
-        var chart_data  = [{
-            values : [],
-            labels : [],
-            type :'pie'
-        }];
+        console.log(data);
 
-        var layout = {
-
-        }
-
-        Plotly.newPlot('important-val-result', chart_data, layout, {responsive : true});
+        //Plotly.newPlot('important-val-result', chart_data, layout, {responsive : true});
     });
 }
 

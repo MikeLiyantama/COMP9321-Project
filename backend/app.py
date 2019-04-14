@@ -44,7 +44,7 @@ CORS(app)
 api = Api(app)
 
 '''api for frontEnd'''
-@api.route('/stats/<feature_name>')
+@api.route('/api/stats/<feature_name>')
 class FrontR(Resource):
 	@api.response(200, 'Success')
 	@api.response(400, 'Resource not Found')
@@ -69,31 +69,29 @@ class FrontR(Resource):
 			
 
 '''api for user_input for target Prediction'''
-@api.route('/predict')
+@api.route('/api/predict')
 class Prediction(Resource):
 	@api.response(200, 'Success')
 	@api.response(400, 'Error')
 	def post(self):
-		data = api.payload
+		payload = api.payload
         #get a json_obj of single record as user_input
-		L = list()
-		L.append(data['age'])
-		L.append(data['sex'])
-		L.append(data['chest_pain_type'])
-		L.append(data['resting_blood_pressure'])
-		L.append(data['serum_cholestoral'])
-		L.append(data['fasting_blood_sugar'])
-		L.append(data['resting_electrocardiographic'])
-		L.append(data['max_heart_rate'])
-		L.append(data['exercise_induced_agina'])
-		L.append(data['oldpeak'])
-		L.append(data['slope_of_peak_ST_segment'])
-		L.append(data['num_major_vessels'])
-		L.append(data['thal'])
-		Li = list()
-		Li.append(L)
-		predict_num = predict_target(Li)
-		#sent as json
+		data = []
+		data.append(payload['age'])
+		data.append(payload['sex'])
+		data.append(payload['chest_pain_type'])
+		data.append(payload['resting_blood_pressure'])
+		data.append(payload['serum_cholestoral'])
+		data.append(payload['fasting_blood_sugar'])
+		data.append(payload['resting_electrocardiographic'])
+		data.append(payload['max_heart_rate'])
+		data.append(payload['exercise_induced_agina'])
+		data.append(payload['oldpeak'])
+		data.append(payload['slope_of_peak_ST_segment'])
+		data.append(payload['num_major_vessels'])
+		data.append(payload['thal'])
+		print(data)
+		predict_num = predict_target([data])
 		print(predict_num)
 		return {'target' : predict_num} , 200
 		#else:
@@ -101,7 +99,7 @@ class Prediction(Resource):
 
 
 '''api for important factors'''
-@api.route('/important_val')
+@api.route('/api/important_factors')
 class ImportantFactors(Resource):
 	@api.response(200, 'Success')
 	def get(self):
