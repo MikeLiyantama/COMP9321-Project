@@ -118,3 +118,6 @@ venv.bak/
 *.launch
 .settings/
 *.sublime-workspace
+
+# Project Specific
+data.db
