@@ -77,7 +77,19 @@ class user_input_Prediction(Resource):
 		data = api.payload
         #get a json_obj of single record as user_input
 		L = list()
-		L.append(data['age'], data['sex'], data['chest_pain_type'],data['resting_blood_pressure'],data['serum_cholestoral'],data['fasting_blood_sugar'],data['resting_electrocardiographic'],data['max_heart_rate'],data['exercise_induced_agina'],data['oldpeak'],data['slope_of_peak_ST_segment'],data['num_major_vessels'],data['thal'])
+		L.append(data['age'])
+		L.append(data['sex'])
+		L.append(data['chest_pain_type'])
+		L.append(data['resting_blood_pressure'])
+		L.append(data['serum_cholestoral'])
+		L.append(data['fasting_blood_sugar'])
+		L.append(data['resting_electrocardiographic'])
+		L.append(data['max_heart_rate'])
+		L.append(data['exercise_induced_agina'])
+		L.append(data['oldpeak'])
+		L.append(data['slope_of_peak_ST_segment'])
+		L.append(data['num_major_vessels'])
+		L.append(data['thal'])
 		if L.isnumeric() == True:
 			Li = list()
 			Li.append(L)
