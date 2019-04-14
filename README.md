@@ -52,7 +52,7 @@ Dataset from http://www.cse.unsw.edu.au/~cs9321/19T1/assn/heart.tar.
  - **Backend**
 ```
 $ cd backend
-$ pip install #install all packages in requirements.txt
+$ pip install -r requirements.txt #install all packages in requirements.txt
 $ python3 app.py
 ```
    WARNING: Backend URL must be at http://127.0.0.1:5000
