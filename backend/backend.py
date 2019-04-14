@@ -1,18 +1,16 @@
-# backend
 
-import pandas as pd
-from pandas.io import sql
+import os
 import sqlite3
 from sqlite3 import Error
+import pandas as pd
+from pandas.io import sql
+
 from flask import Flask
-from flask_restplus import Resource, Api
-from flask_restplus import fields
-from flask_restplus import inputs
-from flask_restplus import reqparse
-import os
-from predict import important_factors
-from predict import predict_target
-# import another python file
+from flask_restplus import Resource, Api, fields, inputs, reqparse
+
+from prediction.predict import important_factors, predict_target
+
+from flask_cors import CORS
 
 
 """ create a database connection to a SQLite database """
@@ -42,13 +40,15 @@ def load_csv():
 
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 '''api for frontEnd'''
-@api.route('/backend/<feature_name>')
+@api.route('/stats/<feature_name>')
 class FrontR(Resource):
 	@api.response(200, 'Success')
-	@api.response(404, 'Error:Resource does not exist')
+	@api.response(400, 'Resource not Found')
+	@api.response(400, 'Invalid Input')
 	def get(self,feature_name):
 		cnx = sqlite3.connect('data.db')
 		df = sql.read_sql('select * from ' + 'data', cnx)
@@ -56,21 +56,21 @@ class FrontR(Resource):
 		cnx.close()
 		# judge the input correct or not
 		if feature_name not in df:
-			return {'message' : 'ERROR:feature does not exist'},404
+			return {'message' : 'Resource not Found'},400
 		if feature_name.isnumeric() == True:
-			return {'message' : 'ERROR:invalid input' } , 404
+			return {'message' : 'Invalid Input' } , 400
 		else:
 			df = {'age' : list(df['age']),
 			'sex' : list(df['sex']),
 			str(feature_name) : list(df[str(feature_name)])}
-        #sent as json
+
 		return df ,200
 
 			
 
 '''api for user_input for target Prediction'''
-@api.route('/backend')
-class user_input_Prediction(Resource):
+@api.route('/predict')
+class Prediction(Resource):
 	@api.response(200, 'Success')
 	@api.response(400, 'Error')
 	def post(self):

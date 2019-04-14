@@ -1,5 +1,5 @@
 const url_const = {
-    stats : 'http://127.0.0.1:5000/backend/',
+    stats : 'http://127.0.0.1:5000/stats/',
     predict : 'http://127.0.0.1:5000/predict',
     important_val : 'http://127.0.0.1:5000/important_val'
 };
