@@ -1,4 +1,4 @@
-numpy==1.15.1
+numpy==1.22.0
 matplotlib==2.2.3
 Flask==1.0.2
 flask_restplus==0.12.1
